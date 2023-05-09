@@ -5,13 +5,14 @@ local nxml = dofile_once("mods/inedible_holy_mountain/lib/nxml.lua")
 local materials_content = ModTextFileGetContent("data/materials.xml")
 local materials_xml = nxml.parse(materials_content)
 
--- Add [indible] tag to holy mountain brick
+-- Add [inedible] tag to holy mountain brick
 for elem in materials_xml:each_child() do
 	if elem.attr.name == "templebrick_noedge_static" then
 		elem.attr.tags = "[inedible]"
 	end
 end
 ModTextFileSetContent("data/materials.xml", tostring(materials_xml))
+-- Adds [inedible] tag to the ignored_material_tag of the CellEaterComponent for burrowing enemies.
 for i, setting in ipairs(mod_settings) do
 	if setting.category_id == "lukkis" then
 		for j, option in ipairs(setting.settings) do
