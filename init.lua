@@ -7,7 +7,7 @@ local materials_xml = nxml.parse(materials_content)
 
 -- Add [inedible] tag to holy mountain brick
 for elem in materials_xml:each_child() do
-	if elem.attr.name == "templebrick_noedge_static" then
+	if tostring(elem.attr.name):find("^templebrick") ~= nil then
 		elem.attr.tags = "[inedible]"
 	end
 end
